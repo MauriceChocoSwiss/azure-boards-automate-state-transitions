@@ -329,3 +329,4 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 /src/AutoStateTransitions/appsettings.Development.json
+src/AutoStateTransitions/Properties/ServiceDependencies/LBTDevOpsTool - Web Deploy/profile.arm.json

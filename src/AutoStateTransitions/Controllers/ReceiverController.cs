@@ -1,26 +1,18 @@
-﻿using System;
+﻿using AutoStateTransitions.Misc;
+using AutoStateTransitions.Models;
+using AutoStateTransitions.Repos.Interfaces;
+using AutoStateTransitions.ViewModels;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
+using Microsoft.VisualStudio.Services.Common;
+using Microsoft.VisualStudio.Services.WebApi;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
-using Microsoft.VisualStudio.Services.WebApi.Patch.Json;
-using Microsoft.VisualStudio.Services.WebApi.Patch;
-using Microsoft.TeamFoundation.Common;
-using Microsoft.Extensions.Primitives;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Http;
-using System.Text;
-
-using AutoStateTransitions.Models;
-using AutoStateTransitions.Repos;
-using AutoStateTransitions.ViewModels;
-using Microsoft.VisualStudio.Services.Common;
-using Microsoft.VisualStudio.Services.WebApi;
-using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
-using AutoStateTransitions.Misc;
-using System.Security.Cryptography.X509Certificates;
-using AutoStateTransitions.Repos.Interfaces;
 
 namespace AutoStateTransitions.Controllers
 {

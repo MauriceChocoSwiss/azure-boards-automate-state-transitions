@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.Net.Http;
 
 namespace AutoStateTransitions
 {
@@ -33,6 +34,9 @@ namespace AutoStateTransitions
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //services.AddSingleton(new HttpClient());
+            services.AddHttpClient();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddSwaggerGen(c =>
@@ -46,7 +50,7 @@ namespace AutoStateTransitions
             services.AddTransient<IWorkItemRepo, WorkItemRepo>();
             services.AddTransient<IRulesRepo, RulesRepo>();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddHealthChecks();
 
         }

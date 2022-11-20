@@ -16,24 +16,34 @@ namespace AutoStateTransitions.Repos
     {
         private IOptions<AppSettings> _appSettings;
         private IHelper _helper;
-        private HttpClient _httpClient;
+        private readonly IHttpClientFactory clientFactory;
 
-        public RulesRepo(IOptions<AppSettings> appSettings, IHelper helper, HttpClient httpClient)
+        public RulesRepo(IOptions<AppSettings> appSettings, IHelper helper, IHttpClientFactory clientFactory)
         {
             _appSettings = appSettings;
             _helper = helper;
-            _httpClient = httpClient;
+            this.clientFactory = clientFactory;
         }
 
         public async Task<RulesModel> ListRules(string wit)
         {
             string src = _appSettings.Value.SourceForRules;
+            var client = clientFactory.CreateClient();
 
-            var json = await _httpClient.GetStringAsync(src + "/rules." + wit.ToLower() + ".json");
-            RulesModel rules = JsonConvert.DeserializeObject<RulesModel>(json);
+            var request = new HttpRequestMessage(HttpMethod.Get, src + "/rules." + wit.ToLower() + ".json");
 
-            return rules;
-            
+            var response = await client.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                RulesModel rules = JsonConvert.DeserializeObject<RulesModel>(json);
+                return rules;
+
+            }
+            else
+            {
+                return new RulesModel();
+            }
         }
 
         public void Dispose()
